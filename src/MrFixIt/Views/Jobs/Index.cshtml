@@ -5,8 +5,10 @@
 }
 <div class="text-center">
     <h3>Our Current Jobs</h3>
+    @*Link to send User to add a new job, sending them to the job controllers create function*@
     @Html.ActionLink("Add a new job", "Create")
 </div>
+@*List of all Jobs that have been created*@
 @foreach (var Job in Model)
 {
     <ul>
@@ -14,10 +16,12 @@
         <ul>
             <li>@Job.Description</li>
         </ul>
+        @*If Job hasn't been claimed, prompt the user it is unclaimed, and give link to job controllers claim function*@
         @if (Job.Worker == null)
         {
         <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
         }
+        @*If job has been claimed, prompt the user it has been calimed, and whom its been claimed by*@
         else
         {
             <li class="btn">This Job is claimed by @Job.Worker.FirstName @Job.Worker.LastName</li>
