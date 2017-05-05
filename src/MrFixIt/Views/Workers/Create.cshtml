@@ -14,9 +14,11 @@
 <body>
     <h2>Create</h2>
     <hr />
+    @*If the User is signed in*@
     @if (User.Identity.IsAuthenticated)
     {
         <h4>You do not have a complete worker profile. Please create your worker profile</h4>
+        //Worker Model Form Page
         @using (Html.BeginForm())
         {
             @Html.LabelFor(model => model.FirstName)

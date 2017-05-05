@@ -16,6 +16,7 @@ namespace MrFixIt.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            // Grab the users worker profile and his current jobs
             var thisWorker = db.Workers.Include(i =>i.Jobs).FirstOrDefault(i => i.UserName == User.Identity.Name);
             if (thisWorker != null)
             {
@@ -36,6 +37,7 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Create(Worker worker)
         {
+            // Create a worker profile for the user
             worker.UserName = User.Identity.Name;
             db.Workers.Add(worker); 
             db.SaveChanges();

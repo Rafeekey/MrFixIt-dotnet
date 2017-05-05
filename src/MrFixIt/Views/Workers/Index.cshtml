@@ -11,11 +11,14 @@
     <div class="text-center">
         <h4>Hello Worker @Model.FirstName @Model.LastName. You are Logged In</h4>
         <h3>Your Current Jobs:</h3>
+        @*Loop through Jobs List to display all current jobs the Worker has taken on*@
         @foreach (var Job in Model.Jobs)
         {
             <h5>@Job.Title</h5>
 
         }
+        @*If the worker is available, prompt him to select a job, and send him to the job controllers index*@
+        @*Else prompt worker he has already been assigned a job*@
         @if (Model.Avaliable)
         {
             <h2>Please @Html.ActionLink("select a job", "Index", "Jobs").</h2>

@@ -16,7 +16,8 @@ namespace MrFixIt.Controllers
 
         // GET: /<controller>/
         public IActionResult Index()
-        {
+        {   
+            // Return the list of Jobs
             return View(db.Jobs.Include(i => i.Worker).ToList());
         }
 
@@ -28,6 +29,7 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Create(Job job)
         {
+            // Add a job to the database
             db.Jobs.Add(job);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -35,6 +37,7 @@ namespace MrFixIt.Controllers
 
         public IActionResult Claim(int id)
         {
+            // Pass in the job to be claimed
             var thisItem = db.Jobs.FirstOrDefault(items => items.JobId == id);
             return View(thisItem);
         }
@@ -42,6 +45,7 @@ namespace MrFixIt.Controllers
         [HttpPost]
         public IActionResult Claim(Job job)
         {
+            // Set the jobs worker to the worker claiming it and save the entry thats been modified
             job.Worker = db.Workers.FirstOrDefault(i => i.UserName == User.Identity.Name);
             db.Entry(job).State = EntityState.Modified;
             db.SaveChanges();

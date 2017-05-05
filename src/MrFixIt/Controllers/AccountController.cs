@@ -35,6 +35,7 @@ namespace MrFixIt.Controllers
 
         public IActionResult Index()
         {
+            //When going to index, if user is logged in, grab his worker model
             if (User.Identity.IsAuthenticated)
             {
                 var thisWorker = db.Workers.FirstOrDefault(item => item.UserName == User.Identity.Name);

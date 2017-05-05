@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MrFixIt.Models
 {
-    // Job Table description, including the job title, description, 
+    // Job Model Description, including the job title, description, 
     // if its completed, pending, and the worker whos doing it
     public class Job
     {
