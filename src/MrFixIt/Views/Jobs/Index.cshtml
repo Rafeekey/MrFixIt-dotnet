@@ -11,6 +11,7 @@
 @*List of all Jobs that have been created*@
 @foreach (var Job in Model)
 {
+    //var TheId = Job.JobId;
     <ul>
         <li>@Job.Title</li>
         <ul>
@@ -19,7 +20,26 @@
         @*If Job hasn't been claimed, prompt the user it is unclaimed, and give link to job controllers claim function*@
         @if (Job.Worker == null)
         {
-        <li class="btn">This job is unclaimed. @Html.ActionLink("Claim This Job", "Claim", new { @text = @Job.Title, id = Job.JobId })</li>
+            <li class="btn">This job is unclaimed.<button type="button" id="@(Job.JobId)" class="claimJob">Claim This Job</button></li>
+            <div id="Claimed@(Job.JobId)"></div>
+        // Claim Job AJAX Script
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.claimJob').click(function () {
+                var jobId = this.id;
+                    $.ajax({
+                        type: 'GET',
+                        data: { JobId: jobId },
+                        url: '@Url.Action("ClaimJob")',
+                        success: function (result) {
+                            // Hide Job if claim was successfull
+                            $('#' + result).hide();
+                            $('#Claimed' + result).html("JUST CLAIMED");
+                        }
+                    });
+                });
+            });
+        </script>
         }
         @*If job has been claimed, prompt the user it has been calimed, and whom its been claimed by*@
         else
@@ -28,7 +48,6 @@
 
         }
     </ul>
-
 
     <hr />
 }
