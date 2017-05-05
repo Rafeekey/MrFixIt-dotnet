@@ -5,7 +5,7 @@
 }
 
 <h4>Welcome to Mr Fix-It</h4>
-
+@*If User is logged in, display hsi user name and info, prompting him that he is signed in*@
 @if (User.Identity.IsAuthenticated)
 {
     <p>@User.Identity.Name</p>
