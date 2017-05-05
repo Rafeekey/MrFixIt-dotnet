@@ -7,9 +7,7 @@ COMPLETED:
 * New jobs may be added to the jobs list.
 * A job can be assigned to a worker.
 * A worker may take on mulitple jobs from the Worker Dashboard.
-
-IN PROGRESS
-* Make *claiming* a job an **AJAX** action.
+* Make *claming* a job an **AJAX** action.
 
 NEXT UP
 * A worker may designate one **active** job at a time. **AJAX**

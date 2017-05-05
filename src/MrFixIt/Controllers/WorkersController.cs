@@ -43,5 +43,14 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult SetAvaliableToFalse(int JobId, int WorkerId)
+        {
+            Worker worker = db.Workers.FirstOrDefault(model => model.WorkerId == WorkerId);
+            worker.Avaliable = false;
+            Job job = db.Jobs.FirstOrDefault(model => model.JobId == JobId);
+            job.Pending = true;
+            return Content(JobId.ToString(), "text/plain");
+        }
     }
 }

@@ -15,8 +15,29 @@
         @foreach (var Job in Model.Jobs)
         {
             <h5>@Job.Title</h5>
+            <p class="status@(Job.JobId)"></p>
+            @if(Model.Avaliable == true)
+            {
+                <button type="button" id="@(Job.JobId)" class="setAvaliable">Set as ACTIVE Job</button>
+            }
 
         }
+        @*Active Job Script*@
+        <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.setAvaliable').click(function () {
+                            var JobId = this.id;
+                            $.ajax({
+                                type: 'GET',
+                                data: { JobId: JobId, WorkerId: @Model.WorkerId },
+                                url: '@Url.Action("SetAvaliableToFalse")',
+                                success: function (result) {
+                                    $('.status' + result).html("ACTIVE");
+                                }
+                            });
+                        });
+                    });
+        </script>
         @*If the worker is available, prompt him to select a job, and send him to the job controllers index*@
         @*Else prompt worker he has already been assigned a job*@
         @if (Model.Avaliable)
