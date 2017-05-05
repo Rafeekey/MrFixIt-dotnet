@@ -50,6 +50,9 @@ namespace MrFixIt.Controllers
             worker.Avaliable = false;
             Job job = db.Jobs.FirstOrDefault(model => model.JobId == JobId);
             job.Pending = true;
+            db.Entry(worker).State = EntityState.Modified;
+            db.Entry(job).State = EntityState.Modified;
+            db.SaveChanges();
             return Content(JobId.ToString(), "text/plain");
         }
     }

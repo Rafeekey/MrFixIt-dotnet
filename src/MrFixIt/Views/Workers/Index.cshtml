@@ -14,11 +14,16 @@
         @*Loop through Jobs List to display all current jobs the Worker has taken on*@
         @foreach (var Job in Model.Jobs)
         {
-            <h5>@Job.Title</h5>
+            <h3><strong>@Job.Title</strong></h3>
+            <h4>JOB STATUS</h4>
             <p class="status@(Job.JobId)"></p>
+            @if(Job.Pending == true)
+            {
+                <h5>PENDING</h5>
+            }
             @if(Model.Avaliable == true)
             {
-                <button type="button" id="@(Job.JobId)" class="setAvaliable">Set as ACTIVE Job</button>
+                <button type="button" id="@(Job.JobId)" class="setAvaliable">Set Job as ACTIVE</button>
             }
 
         }
