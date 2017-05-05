@@ -9,11 +9,14 @@
 
 <h2>Mr. Fix-It</h2>
 <hr />
+@*Greet the User if  one is signed in*@
 @if (User.Identity.IsAuthenticated)
 {
     <h4>Hello @User.Identity.Name!</h4>
 
-} else
+}
+@*Else show links to the Register an account and Login pages*@
+else
 {
     <p>@Html.ActionLink("Register", "Register")</p>
     <p>@Html.ActionLink("Log in", "Login")</p>
