@@ -20,10 +20,19 @@
             @if(Job.Pending == true)
             {
                 <h5>PENDING</h5>
+                <div class="completeBtn">
+                    <button type="button" id="@(Job.JobId)" class="setComplete">Set Job as COMPLETE</button>
+                </div>
             }
-            @if(Model.Avaliable == true)
+            @if (Job.Completed == true)
             {
-                <button type="button" id="@(Job.JobId)" class="setAvaliable">Set Job as ACTIVE</button>
+                <h5>COMPLETED</h5>
+            }
+            @if(Model.Avaliable == true && Job.Completed != true)
+            {
+                <div class="avaliableBtn">
+                    <button type="button" id="@(Job.JobId)" class="setAvaliable">Set Job as ACTIVE</button>
+                </div>
             }
 
         }
@@ -38,6 +47,19 @@
                                 url: '@Url.Action("SetAvaliableToFalse")',
                                 success: function (result) {
                                     $('.status' + result).html("ACTIVE");
+                                    $('.avaliableBtn').hide();
+                                }
+                            });
+                        });
+                        $('.setComplete').click(function () {
+                            var JobId = this.id;
+                            $.ajax({
+                                type: 'GET',
+                                data: { JobId: JobId, WorkerId: @Model.WorkerId },
+                                url: '@Url.Action("SetComplete")',
+                                success: function (result) {
+                                    $('.status' + result).html("COMPLETE");
+                                    $('.completeBtn').hide();
                                 }
                             });
                         });

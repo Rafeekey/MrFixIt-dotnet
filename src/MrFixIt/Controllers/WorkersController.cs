@@ -55,5 +55,17 @@ namespace MrFixIt.Controllers
             db.SaveChanges();
             return Content(JobId.ToString(), "text/plain");
         }
+        public IActionResult SetComplete(int JobId, int WorkerId)
+        {
+            Worker worker = db.Workers.FirstOrDefault(model => model.WorkerId == WorkerId);
+            worker.Avaliable = true;
+            Job job = db.Jobs.FirstOrDefault(model => model.JobId == JobId);
+            job.Pending = false;
+            job.Completed = true;
+            db.Entry(worker).State = EntityState.Modified;
+            db.Entry(job).State = EntityState.Modified;
+            db.SaveChanges();
+            return Content(JobId.ToString(), "text/plain");
+        }
     }
 }
