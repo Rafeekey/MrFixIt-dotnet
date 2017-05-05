@@ -8,9 +8,9 @@ namespace MrFixIt.Models
         public MrFixItContext()
         {
         }
-
+        // Includes Jobs Table
         public virtual DbSet<Job> Jobs { get; set; }
-
+        // Includes Workers Table
         public virtual DbSet<Worker> Workers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)

@@ -8,7 +8,9 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace MrFixIt.Models
-{
+{   // Worker Table description, when a worker account is created, the user
+    // Saves their first name, last name, and availability, also includes
+    // Their Jobs and User Name.
     public class Worker
     {
         [Key]
